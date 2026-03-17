@@ -5,19 +5,17 @@ import Toc from "../../components/docs/Toc.astro";
 import Pagination from "../../components/docs/Pagination.astro";
 
 export const getStaticPaths = async () => {
-  const docs = await getCollection("docs");
-  const path = docs
-    .filter((doc) => doc.slug.startsWith("es/"))
-    .map((doc) => {
-      return {
-        params: {
-          slug: doc.slug.replace(/^es\//, ""),
-        },
-        props: {
-          doc,
-        },
-      };
-    });
+  const docs = await getCollection("docs-es");
+  const path = docs.map((doc) => {
+    return {
+      params: {
+        slug: doc.slug,
+      },
+      props: {
+        doc,
+      },
+    };
+  });
   return path;
 };
 

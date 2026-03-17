@@ -32,16 +32,42 @@
     if (path === '/documentation/es') return '/';
     if (path.startsWith('/documentation/')) return path.replace(/^\/documentation/, '');
     if (path === '/documentation') return '/';
+    if (path.startsWith('/es/')) return path.replace(/^\/es/, '');
+    if (path === '/es') return '/';
+    if (path.startsWith('/en/')) return path.replace(/^\/en/, '');
+    if (path === '/en') return '/';
     return path;
   }
 
   function computeNewPath(targetLang) {
-    const rest = stripLangPrefix(location.pathname);
-    if (targetLang === 'es') {
-      return '/documentation/es' + (rest === '/' ? '/' : rest);
+    const pathname = location.pathname;
+    
+    // Detect which route pattern we're using
+    const isDocumentation = pathname.startsWith('/documentation');
+    const isHomeLang = pathname.startsWith('/en') || pathname.startsWith('/es');
+    
+    const rest = stripLangPrefix(pathname);
+    
+    if (isDocumentation) {
+      // Navigation within /documentation paths
+      if (targetLang === 'es') {
+        return '/documentation/es' + (rest === '/' ? '/' : rest);
+      }
+      return '/documentation' + (rest === '/' ? '/' : rest);
+    } else if (isHomeLang) {
+      // Navigation within /en or /es paths
+      if (targetLang === 'es') {
+        return '/es' + (rest === '/' ? '/' : rest);
+      }
+      return '/en' + (rest === '/' ? '/' : rest);
+    } else {
+      // Root level pages /[slug]
+      // Default to documentation paths for root navigation
+      if (targetLang === 'es') {
+        return '/documentation/es' + (rest === '/' ? '/' : rest);
+      }
+      return '/documentation' + (rest === '/' ? '/' : rest);
     }
-    // english -> documentation
-    return '/documentation' + (rest === '/' ? '/' : rest);
   }
 
   function navigateTo(lang) {

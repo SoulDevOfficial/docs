@@ -6,18 +6,16 @@ import Pagination from "../../components/docs/Pagination.astro";
 
 export const getStaticPaths = async () => {
   const docs = await getCollection("docs");
-  const path = docs
-    .filter((doc) => doc.slug.startsWith("en/"))
-    .map((doc) => {
-      return {
-        params: {
-          slug: doc.slug.replace(/^en\//, ""),
-        },
-        props: {
-          doc,
-        },
-      };
-    });
+  const path = docs.map((doc) => {
+    return {
+      params: {
+        slug: doc.slug,
+      },
+      props: {
+        doc,
+      },
+    };
+  });
   return path;
 };
 
