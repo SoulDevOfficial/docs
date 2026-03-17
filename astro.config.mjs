@@ -7,7 +7,6 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: 'https://seedloaf.com',
-  base: '/documentation',
   integrations: [
     mdx(), 
     react(), 
