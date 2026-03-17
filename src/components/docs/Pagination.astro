@@ -2,8 +2,8 @@
 import { getSidebar } from "../../constants/sidebar";
 
 let currentPath = Astro.url.pathname;
-const langMatch = currentPath.match(/^\/(en|es)(?:\/|$)/);
-const lang = langMatch ? langMatch[1] : 'en';
+const langMatch = currentPath.match(/^\/documentation\/es(?:\/|$)/);
+const lang = langMatch ? 'es' : 'en';
 const SIDEBAR = getSidebar(lang);
 let prevItem, nextItem;
 let currentSectionIndex: number, currentItemIndex: number;
