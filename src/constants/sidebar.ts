@@ -67,7 +67,7 @@ export function getSidebar(lang = 'en'): SidebarSection[] {
       title: 'Seedloaf',
       items: [
         { title: 'Who we are', href: base + '/who-we-are' },
-        { title: 'How we make money', href: base + '/how-we-make-money' },
+        { title: 'How we make money', href: base + '/how-do-we-make-money' },
         { title: 'Frequently Asked Questions', href: base + '/frequently-asked-questions' },
       ],
     },
